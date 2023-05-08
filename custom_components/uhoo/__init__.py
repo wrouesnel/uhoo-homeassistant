@@ -60,7 +60,7 @@ async def async_setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> b
     hass.data[DOMAIN][config_entry.entry_id] = coordinator
 
     # Set up all platforms for this device/entry.
-    hass.config_entries.async_setup_platforms(config_entry, PLATFORMS)
+    await hass.config_entries.async_forward_entry_setups(config_entry, PLATFORMS)
 
     return True
 
@@ -83,7 +83,7 @@ class UhooDataUpdateCoordinator(DataUpdateCoordinator):
             return self.client.get_devices()  # type: ignore
         except Exception as exception:
             LOGGER.error(
-                f"Error: an exception occurred while attempting to get latest data: {exception}"
+                f"Error: an exception occurred while attempting to get latest data: {type(exception).__name__} {exception}"
             )
             raise UpdateFailed() from exception
 

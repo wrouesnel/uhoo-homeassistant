@@ -8,21 +8,19 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
-pyuhoo = "^0.0.5"
+python = "^3.10"
+pyuhoo = {git = "https://github.com/wrouesnel/pyuhoo.git"}
 
 [tool.poetry.dev-dependencies]
-homeassistant = "^2021.8.0b0"
-flake8 = "^3.9.2"
-black = "^21.9b0"
-isort = "^5.9.3"
-mypy = "^0.910"
-pre-commit = "^2.15.0"
-pytest = "^6.2.4"
-pytest-homeassistant-custom-component = "^0.4.3"
-flake8-docstrings = "^1.6.0"
-pylint = "^2.11.1"
-pydocstyle = "^6.1.1"
+homeassistant = "^2023.5.2"
+flake8 = "*"
+black = "*"
+isort = "*"
+mypy = "*"
+pytest = "*"
+pytest-homeassistant-custom-component = "*"
+flake8-docstrings = "*"
+pydocstyle = "*"
 
 [tool.isort]
 profile = "black"
