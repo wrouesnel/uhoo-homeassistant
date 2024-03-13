@@ -2,6 +2,7 @@
 from datetime import date, datetime
 from decimal import Decimal
 
+from homeassistant.const import EntityCategory
 from pyuhoo.device import Device
 
 from custom_components.uhoo import UhooDataUpdateCoordinator
@@ -21,7 +22,7 @@ from .const import (
     DOMAIN,
     MANUFACTURER,
     MODEL,
-    SENSOR_TYPES,
+    SENSOR_TYPES, ATTR_STATE_CLASS, ATTR_ENTITY_CATEGORY,
 )
 
 from homeassistant.components.sensor.const import SensorStateClass, UnitOfTemperature
@@ -58,7 +59,7 @@ class UhooSensorEntity(CoordinatorEntity, SensorEntity):
     def name(self):
         """Return the name of the particular component."""
         device: Device = self.coordinator.data[self._serial_number]
-        return f"uHoo {device.name} {SENSOR_TYPES[self._kind][ATTR_LABEL]}"
+        return f"{device.name} {SENSOR_TYPES[self._kind][ATTR_LABEL]}"
 
     @property
     def unique_id(self):
@@ -97,9 +98,17 @@ class UhooSensorEntity(CoordinatorEntity, SensorEntity):
         return SENSOR_TYPES[self._kind][ATTR_UNIT_OF_MEASUREMENT]
 
     @property
-    def state_class(self) -> str:
+    def state_class(self) -> SensorStateClass | str | None:
         """Return the state class of this entity, from STATE_CLASSES, if any."""
-        return str(SensorStateClass.MEASUREMENT)
+        if ATTR_STATE_CLASS in SENSOR_TYPES[self._kind]:
+            return SENSOR_TYPES[self._kind].get(ATTR_STATE_CLASS)
+        return SensorStateClass.MEASUREMENT
+
+    @property
+    def entity_category(self) -> EntityCategory | None:
+        if ATTR_ENTITY_CATEGORY in SENSOR_TYPES[self._kind]:
+            return SENSOR_TYPES[self._kind][ATTR_ENTITY_CATEGORY]
+        return None
 
     @property
     def icon(self) -> str:

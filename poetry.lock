@@ -2459,7 +2459,7 @@ pycryptodome = "^3.10.1"
 type = "git"
 url = "https://github.com/wrouesnel/pyuhoo.git"
 reference = "HEAD"
-resolved_reference = "8c75e809c9b4e3f626a47489e7d5a3ffaf8baa95"
+resolved_reference = "a6a61aae3e444562aa0215db92df5fad304d510c"
 
 [[package]]
 name = "pyyaml"

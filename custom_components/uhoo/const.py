@@ -8,7 +8,7 @@ from homeassistant.const import (  # noqa:F401
     CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
     CONCENTRATION_PARTS_PER_BILLION,
     CONCENTRATION_PARTS_PER_MILLION,
-    PERCENTAGE,
+    PERCENTAGE, EntityCategory,
 )
 
 from homeassistant.components.sensor.const import SensorDeviceClass, UnitOfPressure, UnitOfTemperature
@@ -35,15 +35,37 @@ API_PRESSURE = "pressure"
 API_TEMP = "temp"
 API_VOC = "voc"
 
+API_SSID = "ssid"
+API_MACADDRESS = "mac_address"
+
 ATTR_LABEL = "label"
 ATTR_UNIQUE_ID = "unique_id"
-
+ATTR_ENTITY_CATEGORY = "entity_category"
+ATTR_STATE_CLASS = "state_class"
 
 LOGGER = logging.getLogger(__package__)
 
 UPDATE_INTERVAL = timedelta(seconds=60)
 
 SENSOR_TYPES = {
+    API_SSID: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:wifi",
+        ATTR_UNIT_OF_MEASUREMENT: None,
+        ATTR_LABEL: "SSID",
+        ATTR_UNIQUE_ID: API_SSID,
+        ATTR_ENTITY_CATEGORY: EntityCategory.DIAGNOSTIC,
+        ATTR_STATE_CLASS: None,
+    },
+    API_MACADDRESS: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:hexadecimal",
+        ATTR_UNIT_OF_MEASUREMENT: None,
+        ATTR_LABEL: "MAC Address",
+        ATTR_UNIQUE_ID: API_MACADDRESS,
+        ATTR_ENTITY_CATEGORY: EntityCategory.DIAGNOSTIC,
+        ATTR_STATE_CLASS: None,
+    },
     API_CO: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.CO,
         ATTR_ICON: "mdi:molecule-co",

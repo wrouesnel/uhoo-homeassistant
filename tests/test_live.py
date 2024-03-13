@@ -43,6 +43,8 @@ async def test_live_availability(hass: HomeAssistant):
     states = hass.states.async_all()
 
     suffixes = {
+        "ssid",
+        "mac_address",
         "carbon_monoxide",
         "carbon_dioxide",
         "pm2_5",
