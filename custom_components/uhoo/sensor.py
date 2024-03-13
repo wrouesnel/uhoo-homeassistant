@@ -25,7 +25,7 @@ from .const import (
     SENSOR_TYPES, ATTR_STATE_CLASS, ATTR_ENTITY_CATEGORY, ATTR_POSTPROCESS,
 )
 
-from homeassistant.components.sensor.const import SensorStateClass, UnitOfTemperature
+from homeassistant.components.sensor.const import SensorStateClass, UnitOfTemperature, SensorDeviceClass
 
 
 async def async_setup_entry(
@@ -97,6 +97,11 @@ class UhooSensorEntity(CoordinatorEntity, SensorEntity):
     @property
     def native_unit_of_measurement(self) -> str | None:
         """Return the unit of measurement of the sensor, if any."""
+        if SENSOR_TYPES[self._kind][ATTR_DEVICE_CLASS] ==  SensorDeviceClass.TEMPERATURE:
+            if self._coordinator.user_settings_temp == "c":
+                return UnitOfTemperature.CELSIUS
+            else:
+                return UnitOfTemperature.FAHRENHEIT
         return SENSOR_TYPES[self._kind][ATTR_UNIT_OF_MEASUREMENT]
 
     @property

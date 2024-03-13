@@ -121,7 +121,7 @@ SENSOR_TYPES = {
     API_TEMP: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.TEMPERATURE,
         ATTR_ICON: "mdi:thermometer",
-        ATTR_UNIT_OF_MEASUREMENT: UnitOfTemperature.CELSIUS,
+        ATTR_UNIT_OF_MEASUREMENT: None,
         ATTR_LABEL: "Temperature",
         ATTR_UNIQUE_ID: API_TEMP,
     },
