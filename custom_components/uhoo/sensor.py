@@ -22,7 +22,7 @@ from .const import (
     DOMAIN,
     MANUFACTURER,
     MODEL,
-    SENSOR_TYPES, ATTR_STATE_CLASS, ATTR_ENTITY_CATEGORY,
+    SENSOR_TYPES, ATTR_STATE_CLASS, ATTR_ENTITY_CATEGORY, ATTR_POSTPROCESS,
 )
 
 from homeassistant.components.sensor.const import SensorStateClass, UnitOfTemperature
@@ -90,6 +90,8 @@ class UhooSensorEntity(CoordinatorEntity, SensorEntity):
         state = getattr(device, self._kind)
         if isinstance(state, list):
             state = state[0]
+        if ATTR_POSTPROCESS in SENSOR_TYPES[self._kind]:
+            state = SENSOR_TYPES[self._kind][ATTR_POSTPROCESS](state)
         return state
 
     @property

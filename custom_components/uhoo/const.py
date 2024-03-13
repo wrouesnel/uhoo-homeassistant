@@ -1,3 +1,4 @@
+import itertools
 from datetime import timedelta
 import logging
 
@@ -42,6 +43,7 @@ ATTR_LABEL = "label"
 ATTR_UNIQUE_ID = "unique_id"
 ATTR_ENTITY_CATEGORY = "entity_category"
 ATTR_STATE_CLASS = "state_class"
+ATTR_POSTPROCESS = "post_process"
 
 LOGGER = logging.getLogger(__package__)
 
@@ -65,6 +67,7 @@ SENSOR_TYPES = {
         ATTR_UNIQUE_ID: API_MACADDRESS,
         ATTR_ENTITY_CATEGORY: EntityCategory.DIAGNOSTIC,
         ATTR_STATE_CLASS: None,
+        ATTR_POSTPROCESS: lambda v: ":".join( "".join(t) for t in itertools.pairwise(v) )
     },
     API_CO: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.CO,
@@ -118,7 +121,7 @@ SENSOR_TYPES = {
     API_TEMP: {
         ATTR_DEVICE_CLASS: SensorDeviceClass.TEMPERATURE,
         ATTR_ICON: "mdi:thermometer",
-        ATTR_UNIT_OF_MEASUREMENT: UnitOfTemperature.FAHRENHEIT,
+        ATTR_UNIT_OF_MEASUREMENT: UnitOfTemperature.CELSIUS,
         ATTR_LABEL: "Temperature",
         ATTR_UNIQUE_ID: API_TEMP,
     },
