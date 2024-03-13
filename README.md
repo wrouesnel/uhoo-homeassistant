@@ -1,3 +1,8 @@
+**FORKED VERSION**
+
+This is a forked version of the original plugin which I am maintaining for my personal use. It may work for you.
+Documentation is updated to try and keep things align.
+
 # uHoo for Home Assistant
 
 [![HACS Custom Repository][hacs-shield]][hacs]
@@ -20,7 +25,7 @@ This integration has been tested with the uHoo home device. It might work with t
 
 ### HACS
 
-Add `https://github.com/csacca/uhoo-homeassistant` as a custom integration repository and install the uHoo integration.
+Add `https://github.com/wrouesnel/uhoo-homeassistant` as a custom integration repository and install the uHoo integration.
 
 ### Manual
 
