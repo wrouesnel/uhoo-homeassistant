@@ -13,6 +13,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 
 from custom_components.uhoo import async_setup_entry, DOMAIN
+from custom_components.uhoo.const import SENSOR_TYPES
 
 if os.getenv("UHOO_USERNAME") is None:
     pytest.skip(
@@ -34,4 +35,31 @@ async def test_live_availability(hass: HomeAssistant):
                                    CONF_USERNAME: os.getenv("UHOO_USERNAME"),
                                    CONF_PASSWORD: os.getenv("UHOO_PASSWORD"),
                                })
-    await async_setup_entry(hass, config_entry=config_entry)
+
+    hass.config_entries._entries[config_entry.entry_id] = config_entry
+    await hass.config_entries.async_setup(config_entry.entry_id)
+    await hass.async_block_till_done()
+
+    states = hass.states.async_all()
+
+    suffixes = {
+        "carbon_monoxide",
+        "carbon_dioxide",
+        "pm2_5",
+        "humidity",
+        "nitrogen_dioxide",
+        "ozone",
+        "air_pressure",
+        "temperature",
+        "total_volatile_organic_compounds",
+    }
+
+    # Check that we get states back for at least one device
+    sensors = []
+    for sensor_suffix in suffixes:
+        for state in states:
+            if state.entity_id.endswith(sensor_suffix):
+                sensors.append(state)
+
+    assert len(sensors) == len(SENSOR_TYPES)
+    pass
