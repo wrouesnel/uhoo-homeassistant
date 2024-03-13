@@ -83,7 +83,8 @@ class UhooDataUpdateCoordinator(DataUpdateCoordinator):
             return self.client.get_devices()  # type: ignore
         except Exception as exception:
             LOGGER.error(
-                f"Error: an exception occurred while attempting to get latest data: {type(exception).__name__} {exception}"
+                f"Error: an exception occurred while attempting to get latest data: {type(exception).__name__} {exception}",
+                exc_info=exception
             )
             raise UpdateFailed() from exception
 

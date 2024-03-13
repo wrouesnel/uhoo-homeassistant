@@ -28,8 +28,8 @@ if os.getenv("UHOO_PASSWORD") is None:
 
 @pytest.mark.enable_socket
 async def test_live_availability(hass: HomeAssistant):
-    pytest_socket.remove_host_restrictions()
-    config_entry = ConfigEntry(version=1, domain=DOMAIN, title="uhoo", source="user",
+    pytest_socket._remove_restrictions()
+    config_entry = ConfigEntry(version=1, minor_version=0, domain=DOMAIN, title="uhoo", source="user",
                                data={
                                    CONF_USERNAME: os.getenv("UHOO_USERNAME"),
                                    CONF_PASSWORD: os.getenv("UHOO_PASSWORD"),

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uhoo-homeassistant"
-version = "0.0.4"
+version = "0.0.7"
 description = "uHoo integration for Home Assistant"
 authors = ["Christopher Sacca <csacca@csacca.net>"]
 repository = "https://github.com/csacca/uhoo-homeassistant"
@@ -8,19 +8,21 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.11,<3.13"
 pyuhoo = {git = "https://github.com/wrouesnel/pyuhoo.git"}
 
-[tool.poetry.dev-dependencies]
-homeassistant = "^2023.5.2"
+[tool.poetry.group.dev.dependencies]
+setuptools = "*"
+
+pytest = "*"
+pytest-homeassistant-custom-component = "^0.13.107"
+
 flake8 = "*"
+flake8-docstrings = "*"
+pydocstyle = "*"
 black = "*"
 isort = "*"
 mypy = "*"
-pytest = "*"
-pytest-homeassistant-custom-component = "*"
-flake8-docstrings = "*"
-pydocstyle = "*"
 
 [tool.isort]
 profile = "black"
@@ -44,6 +46,7 @@ addopts = "--cov custom_components.uhoo"
 console_output_style = "count"
 timeout = "9"
 testpaths = ["tests"]
+asyncio_mode = "auto"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
