@@ -64,4 +64,6 @@ async def test_live_availability(hass: HomeAssistant):
                 sensors.append(state)
 
     assert len(sensors) == len(SENSOR_TYPES)
-    pass
+
+    await config_entry.async_unload(hass)
+    await hass.async_block_till_done()
